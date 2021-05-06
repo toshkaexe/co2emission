@@ -1,0 +1,25 @@
+<project>
+
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+
+	<target name="compile">
+		<mkdir dir="build/classes" />
+		<javac srcdir="src" destdir="build/classes" />
+	</target>
+
+	<target name="build-jar">
+		<mkdir dir="build/jar" />
+		<jar destfile="build/jar/HelloWorld.jar" basedir="build/classes">
+			<manifest>
+				<attribute name="Main-Class" value="emission.src.main.EmissionMain" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="run">
+		<java jar="build/jar/missionMain.jar" fork="true" />
+	</target>
+
+</project>

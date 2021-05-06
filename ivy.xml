@@ -1,0 +1,9 @@
+<ivy-module version="2.0">
+    <info organisation="home" module="co2emission" revision="2.0"/>
+    	
+	<dependencies>
+               
+        <dependency org="org.apache.httpcomponents" name="httpclient" rev="4.5.6"/>
+    </dependencies>
+    
+</ivy-module>

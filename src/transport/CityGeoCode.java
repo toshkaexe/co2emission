@@ -15,8 +15,8 @@ import org.json.JSONObject;
 public class CityGeoCode {
 
 	public String city;
-	private Object longitude;
-	private Object latitude;
+	private float longitude;
+	private float latitude;
 
 	public CityGeoCode() {
 
@@ -29,11 +29,11 @@ public class CityGeoCode {
 
 	}
 
-	public Object getLongitude() {
+	public float getLongitude() {
 		return longitude;
 	}
 
-	public Object getLatitude() {
+	public float getLatitude() {
 		return latitude;
 	}
 
@@ -64,8 +64,8 @@ public class CityGeoCode {
 
 					lat = (JSONArray) coordinates.get("coordinates");
 
-					this.longitude = lat.get(0);
-					this.latitude = lat.get(1);
+					this.longitude = Float.parseFloat(lat.get(0).toString());
+					this.latitude = Float.parseFloat(lat.get(1).toString());
 
 				}
 

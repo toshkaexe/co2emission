@@ -24,7 +24,7 @@ public class Transport {
 	public static final String BUS = "bus";
 	public static final String TRAIN = "train";
 
-	String transport;
+	public String transport;
 
 	public Transport() {
 

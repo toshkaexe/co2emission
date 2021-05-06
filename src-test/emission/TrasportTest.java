@@ -29,6 +29,9 @@ public class TrasportTest extends TestCase {
 		
 		assertEquals(6, transport.setTransport("train").getEmission());
 		assertEquals(27, transport.setTransport("bus").getEmission());
+		
+		assertEquals(0, transport.setTransport("Bus").getEmission());
+		assertEquals(0, transport.setTransport("Bus1").getEmission());
 	}
 
 }

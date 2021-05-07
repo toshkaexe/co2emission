@@ -5,11 +5,18 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.swing.text.html.parser.Entity;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.auth.HttpAuthenticator;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -17,24 +24,35 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import transport.CO2Emission;
 import transport.CityGeoCode;
 import transport.Transport;
 
 public class EmissionMain {
 
+	public JSONObject getPayloadMap() {
+		JSONObject payload = new JSONObject();
+		// payload.put("locations", locations);
+
+		return payload;
+	}
+
 	public static void main(String[] args) throws IOException {
 
-		CityGeoCode citycode = new CityGeoCode();
-
+		CityGeoCode citycode1 = new CityGeoCode();
+		CityGeoCode citycode2 = new CityGeoCode();
 		try {
-			citycode.city("Berlin").getLongLatitude();
-			System.out.println(String.format("Berlin: %f, %f ", citycode.getLatitude(), citycode.getLongitude()));
-			
-			citycode.city("Hamburg").getLongLatitude();
-			System.out.println(String.format("Hamburg: %f, %f ", citycode.getLatitude(), citycode.getLongitude()));
+			citycode1.city("Kassel").getLongLatitude();
+			System.out.println(String.format("Kassel: %f, %f ", citycode1.getLatitude(), citycode1.getLongitude()));
 
-			citycode.city("Munich").getLongLatitude();
-			System.out.println(String.format("Munich: %f, %f ", citycode.getLatitude(), citycode.getLongitude()));
+			citycode2.city("Hamburg").getLongLatitude();
+			System.out.println(String.format("Hamburg: %f, %f ", citycode2.getLatitude(), citycode2.getLongitude()));
+
+			CO2Emission co2em = new CO2Emission();
+			co2em.coordinateCity_1(citycode1.getLatitude(), citycode1.getLongitude())
+					.coordinateCity_2(citycode2.getLatitude(), citycode2.getLongitude()).createPayload();
+
+			System.out.print(co2em.getPayload());
 
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -43,9 +61,7 @@ public class EmissionMain {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+
 //		
 //		// Sending get request
 //        URL url = new URL("http://example-url");
@@ -70,11 +86,24 @@ public class EmissionMain {
 //        // printing result from response
 //        System.out.println("Response:-" + response.toString());
 //		
-		
-		
-		
-		
-		
+
+		String url = "https://api.openrouteservice.org/v2/matrix/cycling-road";
+//
+//		Client client = ClientBuilder.newClient();
+//		Entity<String> payload = Entity.json({"locations":[[9.70093,48.477473],[9.207916,49.153868],[37.573242,55.801281],[115.663757,38.106467]]});
+//		Response response = client.target("https://api.openrouteservice.org/v2/matrix/driving-hgv")
+//		  .request()
+//		  .header("Authorization", "5b3ce3597851110001cf6248143a51d3f31b4614a0d01d3aa4ed4b98")
+//		  .header("Accept", "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8")
+//		  .header("Content-Type", "application/json; charset=utf-8")
+//		  .post(payload);
+//
+//		System.out.println("status: " + response.getStatus());
+//		System.out.println("headers: " + response.getHeaders());
+		// System.out.println("body:" + response.readEntity(String.class));
+		// Username
+		// and
+		// API-Key
 
 	}
 

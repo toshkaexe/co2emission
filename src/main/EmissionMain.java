@@ -1,41 +1,15 @@
 package main;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
-import javax.swing.text.html.parser.Entity;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.ParseException;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.auth.HttpAuthenticator;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import transport.CO2Emission;
 import transport.CityGeoCode;
-import transport.Transport;
 
 public class EmissionMain {
 
-	public JSONObject getPayloadMap() {
-		JSONObject payload = new JSONObject();
-		// payload.put("locations", locations);
-
-		return payload;
-	}
 
 	public static void main(String[] args) throws IOException {
 
@@ -48,11 +22,11 @@ public class EmissionMain {
 			citycode2.city("Hamburg").getLongLatitude();
 			System.out.println(String.format("Hamburg: %f, %f ", citycode2.getLatitude(), citycode2.getLongitude()));
 
-			CO2Emission co2em = new CO2Emission();
-			co2em.coordinateCity_1(citycode1.getLatitude(), citycode1.getLongitude())
+			CO2Emission payload = new CO2Emission();
+			payload.coordinateCity_1(citycode1.getLatitude(), citycode1.getLongitude())
 					.coordinateCity_2(citycode2.getLatitude(), citycode2.getLongitude()).createPayload();
 
-			System.out.print(co2em.getPayload());
+			System.out.print(payload.getPayload());
 
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block

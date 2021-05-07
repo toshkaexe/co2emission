@@ -6,10 +6,10 @@ import org.json.JSONObject;
 
 public class CO2Emission {
 
-	private double x1;
-	private double y1;
-	private double x2;
-	private double y2;
+	public double x1;
+	public double y1;
+	public double x2;
+	public double y2;
 
 	private JSONObject payload;
 

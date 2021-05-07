@@ -1,25 +1,55 @@
-<project>
+<project name="co2emission_calculator" basedir=".." default="main" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<property name="src.dir" value="src" />
+
+	<property name="build.dir" value="dist" />
+	<property name="classes.dir" value="${build.dir}" />
+	<property name="jar.dir" value="${build.dir}" />
+
+	<property name="main-class" value="main.EmissionMain" />
+
+
 
 	<target name="clean">
-		<delete dir="build" />
+		<delete includeEmptyDirs="true">
+			<fileset dir="${build.dir}">
+				<include name="**" />
+			</fileset>
+		</delete>
 	</target>
 
 	<target name="compile">
-		<mkdir dir="build/classes" />
-		<javac srcdir="src" destdir="build/classes" />
+		<!-- <mkdir dir="${build.dir}"/>
+       <javac srcdir="${src.dir}" destdir="${classes.dir}"/> -->
 	</target>
 
-	<target name="build-jar">
-		<mkdir dir="build/jar" />
-		<jar destfile="build/jar/HelloWorld.jar" basedir="build/classes">
+	<target name="jar" depends="clean,compile, resolve">
+		<mkdir dir="${jar.dir}" />
+		<jar destfile="${jar.dir}/co2emission_calculator.jar" basedir="${classes.dir}">
 			<manifest>
-				<attribute name="Main-Class" value="emission.src.main.EmissionMain" />
+				<attribute name="Main-Class" value="${main-class}" />
 			</manifest>
 		</jar>
 	</target>
 
-	<target name="run">
-		<java jar="build/jar/missionMain.jar" fork="true" />
+	<target name="run" depends="clean,jar">
+		<java jar="${jar.dir}/co2emission_calculator.jar" fork="true" />
 	</target>
+
+
+	<target name="clean-build" depends="clean,jar" />
+
+	<target name="main" depends="clean,run" />
+
+	<!-- - - - - - ivy retrieve - - - - - - -->
+	<target name="resolve">
+
+
+		<ivy:cachefileset setid="ivy.libs" />
+
+
+	</target>
+
+
 
 </project>

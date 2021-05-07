@@ -14,9 +14,9 @@ import org.json.JSONObject;
 
 public class CityGeoCode {
 
-	private String city;
-	private float longitude;
-	private float latitude;
+	public String city;
+	public float longitude;
+	public float latitude;
 
 	public CityGeoCode() {
 

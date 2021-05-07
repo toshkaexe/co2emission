@@ -5,14 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.http.client.ClientProtocolException;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import org.junit.Test;
 
 import junit.framework.TestCase;
 import transport.CityGeoCode;
 import transport.Transport;
+
+
 
 public class TrasportTest extends TestCase {
 	private static final SimpleDateFormat tsFormater = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");

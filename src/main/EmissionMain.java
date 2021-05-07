@@ -24,10 +24,9 @@ public class EmissionMain {
 
 		try {
 			citycode.city("Berlin").getLongLatitude();
-
 			System.out.println(String.format("Berlin: %f, %f ", citycode.getLatitude(), citycode.getLongitude()));
-			citycode.city("Hamburg").getLongLatitude();
 			
+			citycode.city("Hamburg").getLongLatitude();
 			System.out.println(String.format("Hamburg: %f, %f ", citycode.getLatitude(), citycode.getLongitude()));
 
 			citycode.city("Munich").getLongLatitude();

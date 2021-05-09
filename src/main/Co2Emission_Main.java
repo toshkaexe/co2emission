@@ -1,9 +1,6 @@
 package main;
 
-import java.io.IOException;
 
-import org.apache.http.ParseException;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import co2.CityGeoCode;
@@ -14,11 +11,15 @@ public class Co2Emission_Main {
 
 	public static void main(String[] args) throws Throwable {
 
+		for (int i = 0; i < args.length; i++) {
+			System.out.println(String.format("Command Line Argument %d is %s", i, args[i]));
+		}
+
 		CityGeoCode citycode1 = new CityGeoCode();
 		CityGeoCode citycode2 = new CityGeoCode();
 
-		citycode1.city("New York").getLongLatitude();
-		citycode2.city("Los Angeles").getLongLatitude();
+		citycode1.city(args[1]).getLongLatitude();
+		citycode2.city(args[3]).getLongLatitude();
 		PUTPayload co2em = new PUTPayload();
 
 		JSONObject payload = co2em.coordinateCity_1(citycode1.getLatitude(), citycode1.getLongitude()) //
@@ -26,7 +27,7 @@ public class Co2Emission_Main {
 				.buildPayload();
 
 		CreateDistance calculateDistance = new CreateDistance();
-		calculateDistance.setPayload(payload).transport("large-electric-car").getDistance();
+		calculateDistance.setPayload(payload).transport(args[4].replace("--transportation-method=", "")).getDistance();
 
 	}
 }

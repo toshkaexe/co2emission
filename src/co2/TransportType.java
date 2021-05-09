@@ -1,10 +1,10 @@
-package main;
+package co2;
 
 import java.util.HashMap;
 
 import java.util.Map;
 
-public class Transport {
+public class TransportType {
 
 	public static final String SMALL_DIESEL_CAR = "small-diesel-car";
 	public static final String SMALL_PETROL_CAR = "small-petrol-car";
@@ -26,11 +26,11 @@ public class Transport {
 
 	public String transport;
 
-	public Transport() {
+	public TransportType() {
 
 	}
 
-	public Transport setTransport(String transport) {
+	public TransportType transportType(String transport) {
 
 		this.transport = transport;
 		return this;

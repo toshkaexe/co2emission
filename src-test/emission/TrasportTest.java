@@ -9,9 +9,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.junit.Test;
 
+import co2.CityGeoCode;
+import co2.TransportType;
 import junit.framework.TestCase;
-import main.CityGeoCode;
-import main.Transport;
 
 
 public class TrasportTest extends TestCase {
@@ -20,28 +20,28 @@ public class TrasportTest extends TestCase {
 	@Test
 	public void test_TransportClass() {
 
-		Transport transport = new Transport();
+		TransportType transport = new TransportType();
 
-		assertEquals(142, transport.setTransport("small-diesel-car").getEmission());
-		assertEquals(154, transport.setTransport("small-petrol-car").getEmission());
-		assertEquals(73, transport.setTransport("small-plugin-hybrid-car").getEmission());
-		assertEquals(50, transport.setTransport("small-electric-car").getEmission());
+		assertEquals(142, transport.transportType("small-diesel-car").getEmission());
+		assertEquals(154, transport.transportType("small-petrol-car").getEmission());
+		assertEquals(73, transport.transportType("small-plugin-hybrid-car").getEmission());
+		assertEquals(50, transport.transportType("small-electric-car").getEmission());
 
-		assertEquals(171, transport.setTransport("medium-diesel-car").getEmission());
-		assertEquals(192, transport.setTransport("medium-plugin-car").getEmission());
-		assertEquals(110, transport.setTransport("medium-plugin-hybrid-car").getEmission());
-		assertEquals(58, transport.setTransport("medium-electric-car").getEmission());
+		assertEquals(171, transport.transportType("medium-diesel-car").getEmission());
+		assertEquals(192, transport.transportType("medium-plugin-car").getEmission());
+		assertEquals(110, transport.transportType("medium-plugin-hybrid-car").getEmission());
+		assertEquals(58, transport.transportType("medium-electric-car").getEmission());
 
-		assertEquals(209, transport.setTransport("large-diesel-car").getEmission());
-		assertEquals(282, transport.setTransport("large-petrol-car").getEmission());
-		assertEquals(126, transport.setTransport("large-plugin-hybrid-car").getEmission());
-		assertEquals(73, transport.setTransport("large-electric-car").getEmission());
+		assertEquals(209, transport.transportType("large-diesel-car").getEmission());
+		assertEquals(282, transport.transportType("large-petrol-car").getEmission());
+		assertEquals(126, transport.transportType("large-plugin-hybrid-car").getEmission());
+		assertEquals(73, transport.transportType("large-electric-car").getEmission());
 
-		assertEquals(6, transport.setTransport("train").getEmission());
-		assertEquals(27, transport.setTransport("bus").getEmission());
+		assertEquals(6, transport.transportType("train").getEmission());
+		assertEquals(27, transport.transportType("bus").getEmission());
 
-		assertEquals(0, transport.setTransport("Bus").getEmission());
-		assertEquals(0, transport.setTransport("Bus1").getEmission());
+		assertEquals(0, transport.transportType("Bus").getEmission());
+		assertEquals(0, transport.transportType("Bus1").getEmission());
 	}
 
 	@Test

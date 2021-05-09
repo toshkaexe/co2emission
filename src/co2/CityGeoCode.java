@@ -1,4 +1,4 @@
-package main;
+package co2;
 
 import java.io.IOException;
 
@@ -54,13 +54,8 @@ public class CityGeoCode {
 
 			HttpEntity entity = response.getEntity();
 			if (entity != null) {
-				JSONObject result1;
-
-				result1 = new JSONObject(EntityUtils.toString(entity));
-
-				JSONArray featuresList;
-
-				featuresList = result1.getJSONArray("features");
+				JSONObject result1 = new JSONObject(EntityUtils.toString(entity));
+				JSONArray featuresList = result1.getJSONArray("features");
 				JSONObject geometry = featuresList.getJSONObject(0);
 				JSONObject coordinates = (JSONObject) geometry.get("geometry");
 

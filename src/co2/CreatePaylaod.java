@@ -1,4 +1,4 @@
-package main;
+package co2;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,19 +36,19 @@ public class CreatePaylaod {
 		JSONObject result = new JSONObject();
 		JSONArray locations = new JSONArray();
 		try {
-			result.put("locations", locations);
+			result.put("coordinates", locations);
 		} catch (JSONException e) {
 
 			e.printStackTrace();
 		}
 
 		double[] city1 = new double[2];
-		city1[0] = x1;
-		city1[1] = y1;
+		city1[0] = y1;
+		city1[1] = x1;
 
 		double[] city2 = new double[2];
-		city2[0] = x2;
-		city2[1] = y2;
+		city2[0] = y2;
+		city2[1] = x2;
 
 		try {
 			JSONArray array1 = new JSONArray(city1);

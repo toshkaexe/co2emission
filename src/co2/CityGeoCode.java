@@ -55,9 +55,9 @@ public class CityGeoCode {
 			HttpEntity entity = response.getEntity();
 
 			if (entity != null) {
-				JSONObject result1 = new JSONObject(EntityUtils.toString(entity));
-				System.out.println(result1);
-				JSONArray featuresList = result1.getJSONArray("features");
+				JSONObject obj = new JSONObject(EntityUtils.toString(entity));
+				// System.out.println(result1);
+				JSONArray featuresList = obj.getJSONArray("features");
 				JSONObject geometry = featuresList.getJSONObject(0);
 				JSONObject coordinates = (JSONObject) geometry.get("geometry");
 

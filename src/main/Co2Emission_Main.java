@@ -7,27 +7,26 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import co2.CityGeoCode;
-import co2.CreatePaylaod;
-import co2.Distance;
+import co2.CreateDistance;
+import co2.PUTPayload;
 
 public class Co2Emission_Main {
 
-	public static void main(String[] args) throws IOException, ParseException, JSONException {
+	public static void main(String[] args) throws Throwable {
 
 		CityGeoCode citycode1 = new CityGeoCode();
 		CityGeoCode citycode2 = new CityGeoCode();
 
 		citycode1.city("New York").getLongLatitude();
 		citycode2.city("Los Angeles").getLongLatitude();
+		PUTPayload co2em = new PUTPayload();
 
-		CreatePaylaod co2em = new CreatePaylaod();
 		JSONObject payload = co2em.coordinateCity_1(citycode1.getLatitude(), citycode1.getLongitude()) //
 				.coordinateCity_2(citycode2.getLatitude(), citycode2.getLongitude())//
 				.buildPayload();
 
-		Distance calculateDistance = new Distance();
+		CreateDistance calculateDistance = new CreateDistance();
 		calculateDistance.setPayload(payload).transport("large-electric-car").getDistance();
-
 
 	}
 }

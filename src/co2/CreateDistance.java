@@ -15,21 +15,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Distance {
+public class CreateDistance {
 
 	public JSONObject payload = null;
 	public String transort = "";
 
-	public Distance() {
+	public CreateDistance() {
 
 	}
 
-	public Distance setPayload(JSONObject payload) {
+	public CreateDistance setPayload(JSONObject payload) {
 		this.payload = payload;
 		return this;
 	}
 
-	public Distance transport(String transort) {
+	public CreateDistance transport(String transort) {
 		this.transort = transort;
 		return this;
 	}
@@ -69,8 +69,8 @@ public class Distance {
 			dist = Float.parseFloat(duration.getString("distance"));
 
 			TransportType transport = new TransportType();
-			result = transport.transportType(transort).getEmission() * dist;
-			System.out.println(String.format("Co2 calculator: %.1fg", result));
+			result = (transport.transportType(transort).getEmission() * dist) / 1000;
+			System.out.println(String.format("Your trip caused: %.1fkg of CO2-equivalent", result));
 			return result;
 		}
 		case 500: {

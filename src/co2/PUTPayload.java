@@ -4,18 +4,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CreatePaylaod {
+public class PUTPayload {
 
 	public double x1 = 0;
 	public double y1 = 0;
 	public double x2 = 0;
 	public double y2 = 0;
 
-	public CreatePaylaod() {
+	public PUTPayload() {
 
 	}
 
-	public CreatePaylaod coordinateCity_1(double x1, double y1) {
+	public PUTPayload coordinateCity_1(double x1, double y1) {
 
 		this.x1 = x1;
 		this.y1 = y1;
@@ -23,7 +23,7 @@ public class CreatePaylaod {
 
 	}
 
-	public CreatePaylaod coordinateCity_2(double x2, double y2) {
+	public PUTPayload coordinateCity_2(double x2, double y2) {
 
 		this.x2 = x2;
 		this.y2 = y2;

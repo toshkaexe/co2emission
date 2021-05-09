@@ -1,4 +1,4 @@
-package transport;
+package main;
 
 import java.util.HashMap;
 
@@ -59,7 +59,7 @@ public class Transport {
 		map.put(BUS, 27);
 		map.put(TRAIN, 6);
 
-		if(map.get(transport) != null || (map.get(transport) == null && map.containsKey(transport))) {
+		if (map.get(transport) != null || (map.get(transport) == null && map.containsKey(transport))) {
 			return map.get(transport);
 		} else {
 			return 0;

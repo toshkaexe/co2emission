@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
-
+import org.json.JSONException;
 import org.junit.Test;
 
 import junit.framework.TestCase;
-import transport.CityGeoCode;
-import transport.Transport;
-
+import main.CityGeoCode;
+import main.Transport;
 
 
 public class TrasportTest extends TestCase {
@@ -45,7 +45,7 @@ public class TrasportTest extends TestCase {
 	}
 
 	@Test
-	public void test_lanitude() {
+	public void test_lanitude() throws ParseException, JSONException {
 
 		CityGeoCode citycode = new CityGeoCode();
 
@@ -72,9 +72,10 @@ public class TrasportTest extends TestCase {
 
 		Date nowTs = tsFormater.parse("2019-11-27T15:53:18.243+0000");
 		Date finalReportTs = tsFormater.parse("2019-11-27T14:21:22.243+0000");
-	//	JSONObject expectedOutput = buildExpectedAcceptRequestOutput(finalReportTs, nowTs);
+		// JSONObject expectedOutput = buildExpectedAcceptRequestOutput(finalReportTs,
+		// nowTs);
 
-	//	System.out.println(expectedOutput.toString());
+		// System.out.println(expectedOutput.toString());
 //		try {
 //			defaultApplicationName(expectedOutput.getJSONObject("appl").getString("name"));
 //			applicationVersion(expectedOutput.getJSONObject("appl").getString("version"));
@@ -107,7 +108,5 @@ public class TrasportTest extends TestCase {
 //			fail();
 //		}
 	}
-
-	
 
 }

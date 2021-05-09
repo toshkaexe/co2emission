@@ -1,55 +1,66 @@
-<project name="co2emission_calculator" basedir=".." default="main" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="co2emission" basedir=".." default="noop" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<description>Project co2emission calculator</description>
 
 	<property name="src.dir" value="src" />
-
-	<property name="build.dir" value="dist" />
-	<property name="classes.dir" value="${build.dir}" />
-	<property name="jar.dir" value="${build.dir}" />
-
+	<property name="build.dir" value="bin" />
+	<property name="dist.dir" value="dist" />
+	<property name="dist.lib.dir" value="dist/lib" />
+	<property name="lib.dir" value="lib" />
 	<property name="main-class" value="main.EmissionMain" />
 
-
-
-	<target name="clean">
-		<delete includeEmptyDirs="true">
-			<fileset dir="${build.dir}">
-				<include name="**" />
-			</fileset>
-		</delete>
+	<target name='noop' />
+	<!-- - - - - - ivy retrieve - - - - - - -->
+	<target name="resolve">
+		<ivy:cachefileset setid="ivy.libs" />
 	</target>
 
-	<target name="compile">
-		<!-- <mkdir dir="${build.dir}"/>
-       <javac srcdir="${src.dir}" destdir="${classes.dir}"/> -->
+	<target name="init">
+		<mkdir dir="${build.dir}" />
 	</target>
 
-	<target name="jar" depends="clean,compile, resolve">
-		<mkdir dir="${jar.dir}" />
-		<jar destfile="${jar.dir}/co2emission_calculator.jar" basedir="${classes.dir}">
-			<manifest>
-				<attribute name="Main-Class" value="${main-class}" />
-			</manifest>
+	<path id="classpath">
+		<fileset dir="/">
+			<include name="${lib.dir}/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="compile" depends="init" description="compile the sourse">
+		<javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath">
+		</javac>
+	</target>
+
+	<target name="copy_dependencies">
+		<mkdir dir="${dist.lib.dir}" />
+		<jar jarfile="${dist.lib.dir}/dependencies-all-jar">
+			<zipgroupfileset dir="${lib.dir}">
+				<include name="**/*.jar" />
+			</zipgroupfileset>
 		</jar>
 	</target>
 
-	<target name="run" depends="clean,jar">
-		<java jar="${jar.dir}/co2emission_calculator.jar" fork="true" />
+	<target name="jar" depends="compile, copy_dependencies" description="pycking ouutput to jar">
+
+		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${dist.lib.dir}" />
+		<jar jarfile="${dist.dir}/co2emission.jar" basedir="${build.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="main.EmissionMain.jar" />
+
+			</manifest>
+
+			<zipfileset src="${dist.lib.dir}/dependencies-all-jar" excludes="META-INF/*.SF" />
+
+
+		</jar>
 	</target>
 
 
-	<target name="clean-build" depends="clean,jar" />
+	<target name="clean" description="cleaning up">
 
-	<target name="main" depends="clean,run" />
-
-	<!-- - - - - - ivy retrieve - - - - - - -->
-	<target name="resolve">
-
-
-		<ivy:cachefileset setid="ivy.libs" />
-
-
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
 	</target>
 
 
-
+	<target name="main" depends="clean, compile, jar" />
 </project>

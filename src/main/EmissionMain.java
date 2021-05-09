@@ -2,47 +2,34 @@ package main;
 
 import java.io.IOException;
 
-import org.apache.http.client.ClientProtocolException;
 import org.json.JSONObject;
 
-import transport.CO2Emission;
-import transport.CityGeoCode;
-
-
 public class EmissionMain {
-
-	public JSONObject getPayloadMap() {
-		JSONObject payload = new JSONObject();
-		// payload.put("locations", locations);
-
-		return payload;
-	}
 
 	public static void main(String[] args) throws IOException {
 
 		CityGeoCode citycode1 = new CityGeoCode();
 		CityGeoCode citycode2 = new CityGeoCode();
-		try {
-			citycode1.city("Kassel").getLongLatitude();
-			System.out.println(String.format("Berlin: %f, %f ", citycode1.getLatitude(), citycode1.getLongitude()));
 
-			citycode2.city("Hamburg").getLongLatitude();
-			System.out.println(String.format("Hamburg: %f, %f ", citycode2.getLatitude(), citycode2.getLongitude()));
+		citycode1.city("Berlin").getLongLatitude();
 
-			CO2Emission co2em = new CO2Emission();
-			co2em.coordinateCity_1(citycode1.getLatitude(), citycode1.getLongitude())
-					.coordinateCity_2(citycode2.getLatitude(), citycode2.getLongitude()).createPayload();
+		float laltitude = citycode1.getLatitude();
+		float lognitude = citycode1.getLongitude();
 
-			System.out.print(co2em.getPayload());
+		System.out.println(String.format("Berlin: %f, %f ", laltitude, lognitude));
 
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		citycode2.city("Hamburg").getLongLatitude();
+		System.out.println(String.format("Hamburg: %f, %f ", citycode2.getLatitude(), citycode2.getLongitude()));
 
+		CreatePaylaod co2em = new CreatePaylaod();
+		JSONObject payload = co2em.coordinateCity_1(citycode1.getLatitude(), citycode1.getLongitude()) //
+				.coordinateCity_2(citycode2.getLatitude(), citycode2.getLongitude())//
+				.buildPayload();
+
+		System.out.print(payload);
+
+	}
+}
 //		
 //		// Sending get request
 //        URL url = new URL("http://example-url");
@@ -68,7 +55,7 @@ public class EmissionMain {
 //        System.out.println("Response:-" + response.toString());
 //		
 
-		String url = "https://api.openrouteservice.org/v2/matrix/cycling-road";
+// String url = "https://api.openrouteservice.org/v2/matrix/cycling-road";
 //
 //		Client client = ClientBuilder.newClient();
 //		Entity<String> payload = Entity.json({"locations":[[9.70093,48.477473],[9.207916,49.153868],[37.573242,55.801281],[115.663757,38.106467]]});
@@ -81,14 +68,14 @@ public class EmissionMain {
 //
 //		System.out.println("status: " + response.getStatus());
 //		System.out.println("headers: " + response.getHeaders());
-		// System.out.println("body:" + response.readEntity(String.class));
-		// Username
-		// and
-		// API-Key
+// System.out.println("body:" + response.readEntity(String.class));
+// Username
+// and
+// API-Key
 
-	}
+// }
 
-	// https://api.openrouteservice.org/v2/matrix/cycling-road
-	// POSThttps://api.openrouteservice.org/v2/matrix/cycling-road
+// https://api.openrouteservice.org/v2/matrix/cycling-road
+// POSThttps://api.openrouteservice.org/v2/matrix/cycling-road
 
-}
+//}

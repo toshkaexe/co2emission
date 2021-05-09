@@ -1,9 +1,17 @@
 <ivy-module version="2.0">
-    <info organisation="home" module="co2emission" revision="2.0"/>
+    <info organisation="home" module="co2emission" revision="1.0"/>
     	
+   <publications>
+        <artifact name="co2emission" type="jar" ext="jar" />
+        <artifact name="co2emission" type="source" ext="jar" />
+
+    </publications>
+    
 	<dependencies>
         <dependency org="org.apache.httpcomponents" name="httpclient" rev="4.5.6"/>
-        <dependency org="org.json" name="json" rev="20201115"/>
+        
+        <dependency org="org.json" name="json" rev="20090211"/>
+
     </dependencies>
     
 </ivy-module>

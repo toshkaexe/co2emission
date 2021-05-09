@@ -17,8 +17,8 @@ public class Co2Emission_Main {
 		CityGeoCode citycode1 = new CityGeoCode();
 		CityGeoCode citycode2 = new CityGeoCode();
 
-		citycode1.city("Berlin").getLongLatitude();
-		citycode2.city("Hamburg").getLongLatitude();
+		citycode1.city("New York").getLongLatitude();
+		citycode2.city("Los Angeles").getLongLatitude();
 
 		CreatePaylaod co2em = new CreatePaylaod();
 		JSONObject payload = co2em.coordinateCity_1(citycode1.getLatitude(), citycode1.getLongitude()) //
@@ -26,7 +26,7 @@ public class Co2Emission_Main {
 				.buildPayload();
 
 		Distance calculateDistance = new Distance();
-		calculateDistance.setPayload(payload).transport("bus").getDistance();
+		calculateDistance.setPayload(payload).transport("large-electric-car").getDistance();
 
 
 	}

@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CityGeoCode {
+
 	public String city = "";
 	public float longitude = 0;
 	public float latitude = 0;
@@ -24,8 +25,7 @@ public class CityGeoCode {
 	}
 
 	public CityGeoCode city(String city) {
-
-		this.city = city;
+		this.city = city.replaceAll(" ", "%20");
 		return this;
 
 	}
@@ -53,8 +53,10 @@ public class CityGeoCode {
 			JSONArray lat;
 
 			HttpEntity entity = response.getEntity();
+
 			if (entity != null) {
 				JSONObject result1 = new JSONObject(EntityUtils.toString(entity));
+				System.out.println(result1);
 				JSONArray featuresList = result1.getJSONArray("features");
 				JSONObject geometry = featuresList.getJSONObject(0);
 				JSONObject coordinates = (JSONObject) geometry.get("geometry");

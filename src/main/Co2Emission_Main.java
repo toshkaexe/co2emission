@@ -1,6 +1,5 @@
 package main;
 
-
 import org.json.JSONObject;
 
 import co2.CityGeoCode;
@@ -14,20 +13,23 @@ public class Co2Emission_Main {
 		for (int i = 0; i < args.length; i++) {
 			System.out.println(String.format("Command Line Argument %d is %s", i, args[i]));
 		}
-
 		CityGeoCode citycode1 = new CityGeoCode();
 		CityGeoCode citycode2 = new CityGeoCode();
-
+		PUTPayload co2em = new PUTPayload();
+		CreateDistance calculateDistance = new CreateDistance();
 		citycode1.city(args[1]).getLongLatitude();
 		citycode2.city(args[3]).getLongLatitude();
-		PUTPayload co2em = new PUTPayload();
 
 		JSONObject payload = co2em.coordinateCity_1(citycode1.getLatitude(), citycode1.getLongitude()) //
 				.coordinateCity_2(citycode2.getLatitude(), citycode2.getLongitude())//
 				.buildPayload();
 
-		CreateDistance calculateDistance = new CreateDistance();
-		calculateDistance.setPayload(payload).transport(args[4].replace("--transportation-method=", "")).getDistance();
+		if (args.length == 6) {
 
+			calculateDistance.setPayload(payload).transport(args[5]).getDistance();
+		} else {
+			calculateDistance.setPayload(payload).transport(args[4].replace("--transportation-method=", "")).getDistance();
+
+		}
 	}
 }

@@ -11,7 +11,7 @@ I have accepted the following rules:
 •	We can have  between --transportation-method and type  of transport an equal sign or an empty symbol
 •	if the city is composed of two words, put the city name in quotation marks
 
-Example of my program
+Example of my solution:
 
        AntonZ@TTTTTTT C:\Users\antonz\git_workspace\emission\staging
        $ java -jar co2-calculator.jar --start "Hamburg" --end "Kassel" --transportation-method=bus
